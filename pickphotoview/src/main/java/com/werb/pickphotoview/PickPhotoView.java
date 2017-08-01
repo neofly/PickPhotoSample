@@ -20,11 +20,16 @@ public class PickPhotoView {
         activity = builder.activity;
     }
 
-    private void start(){
+    private void start() {
+        Intent intent = getIntent();
+        activity.startActivityForResult(intent,PickConfig.PICK_PHOTO_DATA);
+    }
+
+    private Intent getIntent() {
         Intent intent = new Intent();
         intent.setClass(activity,PickPhotoActivity.class);
-        intent.putExtra(PickConfig.INTENT_PICK_DATA,pickData);
-        activity.startActivityForResult(intent,PickConfig.PICK_PHOTO_DATA);
+        intent.putExtra(PickConfig.INTENT_PICK_DATA, pickData);
+        return intent;
     }
 
     public static class Builder{
@@ -95,5 +100,8 @@ public class PickPhotoView {
             create().start();
         }
 
+        public Intent getIntent() {
+            return create().getIntent();
+        }
     }
 }
